@@ -2,16 +2,22 @@ package com.artem.remindme;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.artem.remindme.adapter.TabsPagerFragmentAdapter;
+
 public class MainActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
     private static final int LAYOUT = R.layout.activity_main;
+
+    private Toolbar toolbar;
     private DrawerLayout drawerLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,7 +27,10 @@ public class MainActivity extends AppCompatActivity {
 
         initToolBar();
         initNavigationView();
+        initTabs();
+
     }
+
 
     private void initToolBar(){
         toolbar = (Toolbar)findViewById(R.id.toolbar);
@@ -37,6 +46,16 @@ public class MainActivity extends AppCompatActivity {
         toolbar.inflateMenu(R.menu.menu);
     }
 
+    private void initTabs() {
+        viewPager = (ViewPager)findViewById(R.id.view_pager);
+        TabsPagerFragmentAdapter adapter = new TabsPagerFragmentAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+
+        TabLayout tabLayout = (TabLayout)findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
+
+
+    }
 
     private void initNavigationView() {
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);

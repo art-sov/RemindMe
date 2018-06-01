@@ -12,7 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.artem.remindme.adapter.TabsPagerFragmentAdapter;
+import com.artem.remindme.adapter.TabsFragmentAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,8 +50,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initTabs() {
+
         viewPager = (ViewPager)findViewById(R.id.view_pager);
-        TabsPagerFragmentAdapter adapter = new TabsPagerFragmentAdapter(getSupportFragmentManager());
+        TabsFragmentAdapter adapter = new TabsFragmentAdapter(this, getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
         TabLayout tabLayout = (TabLayout)findViewById(R.id.tab_layout);
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.view_navigation_open, R.string.view_navigation_close);
 
-        drawerLayout.setDrawerListener(toggle);
+        drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
